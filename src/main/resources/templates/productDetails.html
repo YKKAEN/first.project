@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main">
+<div layout:fragment="content">
+
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li><a th:href="@{'/index'}">home</a></li>
+                            <li>product detail</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product_details mt-100 mb-100" style="margin-left: 5%">
+        <form th:each="product: ${productList}">
+            <div class="container" style="margin-left: 25%">
+                <div class="row">
+                    <div class="details_img">
+                        <img th:src="@{'/view-photo/' + ${product.productPhoto}}" alt="photo"
+                             style="width: 310px; height: 469px">
+                    </div>
+                    <div class="col-lg-5 col-md-5">
+                        <div class="product_d_right">
+                            <h1 th:text="${product.productName}"></h1>
+                            <div class="price_box">
+                                <span class="current_price" th:text="'$' + ' ' + ${product.productPrice}"></span>
+                            </div>
+                            <div class="product_desc">
+                                <p th:text="${product.productDescription}"></p>
+                            </div>
+                            <div class="product_variant quantity">
+                                <label>quantity</label>
+                                <input min="1" max="100" value="1" type="number">
+                                <button class="button" type="submit">add to cart</button>
+
+                            </div>
+                            <div class=" product_d_action">
+                                <ul>
+                                    <li>ISBN:&nbsp<a th:text="${product.productIsbn}"></a></li>
+                                    <li>Publication date:&nbsp<a th:text="${product.productDate}"></a></li>
+                                    <li>Pages:&nbsp<a th:text="${product.productPages}"></a></li>
+                                </ul>
+                            </div>
+                            <div class="product_meta">
+                                <span th:text="${product.category.categoryName}">Category:<a>Clothing</a></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

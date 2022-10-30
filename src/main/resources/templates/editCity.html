@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main">
+<div layout:fragment="content">
+
+  <div class="breadcrumbs_area">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="breadcrumb_content">
+            <h3>EditCity</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" >
+    <div class="row row-cols-2 g-4" style="margin-top: 5px; display: flex; justify-content: center; align-items: center">
+      <div class="col">
+        <form th:action="@{'/city/edit/' + ${editCity.id}}" method="post" class="mx-auto mb-5"
+              th:object="${editCity}">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" th:field="*{cityName}" required>
+          </div>
+          <div class="mb-3" style="display: flex; justify-content: end">
+            <a th:href="@{'/cities'}" class="btn btn-secondary" style="margin-right: 8px">Close</a>
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

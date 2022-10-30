@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main">
+<div layout:fragment="content">
+    <div class="container">
+        <section class="page_403">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                            <div class="four_zero_four_bg">
+                                <h1 class="text-center">403</h1>
+                            </div>
+                            <div class="contant_box_403" style="text-align: center">
+                                <h3 class="h2">
+                                    Look like you're lost
+                                </h3>
+                                <p>you don't have permission to access this page.</p>
+                                <a th:href="@{'/index'}" class="btn btn-success" style="border-radius: 4px">Go to Home</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>
+

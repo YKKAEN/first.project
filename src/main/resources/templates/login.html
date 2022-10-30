@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main">
+<div layout:fragment="content">
+
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h3>Log In to Your Account</h3>
+                        <ul>
+                            <li><a th:href="@{'/index'}">home</a></li>
+                            <li>Sign In</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 4px">
+                        <div class="card-body p-5">
+                            <h3 class="mb-3">Sign In</h3>
+                            <div th:if="${param.regSuccess}" class="alert alert-success" role="alert">
+                                You have successfully registered your account.
+                            </div>
+                            <div th:if="${param.error}" class="alert alert-danger" role="alert"
+                                 style="border-radius: 1px">
+                                The email or password you entered doesn't match.
+                            </div>
+                            <form th:action="@{'/auth'}" method="post" id="myform">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="typeEmailX-2">Email</label>
+                                    <input type="email" id="typeEmailX-2" required name="user_email" class="form-control form-control-lg"/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="typePasswordX-2">Password</label>
+                                    <input type="password" id="typePasswordX-2" required name="user_password" class="form-control form-control-lg"/>
+                                </div>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue</button>
+                                <p style="margin-top: 15px">Don't have an account yet?&nbsp<a th:href="@{'/register'}">Create an
+                                    Account</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

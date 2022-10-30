@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main">
+<div layout:fragment="content">
+
+    <div class="shop_area shop_fullwidth mt-25 mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-index" th:each="product: ${productList}">
+                    <article class="single_product">
+                        <figure>
+                            <div class="product_thumb">
+                                <a class="primary_img" th:href="@{'/details/' + ${product.id}}">
+                                    <img th:src="@{'/view-photo/' + ${product.productPhoto}}" alt="photo" style="width: 394px; height: 234px"></a>
+<!--                                    <img src="/img/product/1.jpg" alt=""></a>-->
+                                <div class="action_links">
+                                    <ul>
+                                        <li class="add_to_cart"><a href="cartItem.html" title="Add to cart"><i
+                                                class="icon-shopping-bag"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_content grid_content">
+                                <div class="product_price_rating">
+                                    <h4 class="product_name"><a th:href="@{'/details/' + ${product.id}}" th:text="${product.productName}"></a></h4>
+                                    <div class="price_box">
+                                        <span class="current_price" th:text="'$' + ' ' + ${product.productPrice}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
