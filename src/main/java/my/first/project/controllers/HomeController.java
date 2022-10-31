@@ -72,15 +72,21 @@ public class HomeController {
 
     @PostMapping(value = "/register")
     public String register(@RequestParam(name = "firstName") String firstName,
-                               @RequestParam(name = "lastName") String lastName,
-                               @RequestParam(name = "email") String email,
-                               @RequestParam(name = "password") String password) {
+                           @RequestParam(name = "lastName") String lastName,
+                           @RequestParam(name = "email") String email,
+                           @RequestParam(name = "password") String password,
+                           @RequestParam(name = "phone") String phone,
+                           @RequestParam(name = "address") String address,
+                           @RequestParam(name = "cityId") Long cityId) {
 
         Users newUser = new Users();
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
         newUser.setEmail(email);
         newUser.setPassword(password);
+        newUser.setPhone(phone);
+        newUser.setAddress(address);
+        newUser.setCity(cityService.getCityById(cityId));
 
         if (usersService.createUser(newUser) != null) {
             return "redirect:/login?regSuccess";

@@ -71,7 +71,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String addProduct(@RequestParam(name = "productPhoto") MultipartFile file,
                              @RequestParam(name = "productName") String productName,
-                             @RequestParam(name = "productPrice") int productPrice,
+                             @RequestParam(name = "productPrice") BigDecimal productPrice,
                              @RequestParam(name = "productDescription") String productDescription,
                              @RequestParam(name = "categoryId") Long categoryId,
                              @RequestParam(name = "productIsbn") String productIsbn,
@@ -123,7 +123,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public String editProduct(@RequestParam(name = "productPhoto") MultipartFile file,
                               @RequestParam(name = "productName") String productName,
-                              @RequestParam(name = "productPrice") int productPrice,
+                              @RequestParam(name = "productPrice") BigDecimal productPrice,
                               @RequestParam(name = "productDescription") String productDescription,
                               @RequestParam(name = "categoryId") Long categoryId,
                               @RequestParam(name = "productIsbn") String productIsbn,

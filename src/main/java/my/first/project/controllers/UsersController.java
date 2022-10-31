@@ -25,9 +25,6 @@ public class UsersController {
     private UsersService usersService;
 
     @Autowired
-    private Users newUser;
-
-    @Autowired
     private RolesRervice rolesRervice;
 
     @Autowired
@@ -42,7 +39,7 @@ public class UsersController {
     public String getAllUsers(Model model) {
         model.addAttribute("usersList", usersService.getAllUsers());
         model.addAttribute("currentUser", usersService.getUserData());
-        model.addAttribute("newUser", newUser);
+        model.addAttribute("cityList", cityService.getAllCities());
         return "users";
     }
 
@@ -57,18 +54,31 @@ public class UsersController {
         model.addAttribute("unassignedRoles", roles);
         model.addAttribute("editUser", editUser);
         model.addAttribute("currentUser", usersService.getUserData());
+        model.addAttribute("cityList", cityService.getAllCities());
 
         return "editUser";
     }
 
     @PostMapping(value = "/users/edit/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public String editUser(@PathVariable(name = "id") Long id) {
+    public String editUser(@RequestParam(name = "firstName") String firstName,
+                           @RequestParam(name = "lastName") String lastName,
+                           @RequestParam(name = "email") String email,
+                           @RequestParam(name = "phone") String phone,
+                           @RequestParam(name = "address") String address,
+                           @RequestParam(name = "cityId") Long cityId,
+                           @PathVariable("id") Long id) {
 
-        Users editUser = usersService.getUsersById(id);
+        Users users = usersService.getUsersById(id);
+        users.setFirstName(firstName);
+        users.setLastName(lastName);
+        users.setEmail(email);
+        users.setPhone(phone);
+        users.setAddress(address);
+        users.setCity(cityService.getCityById(cityId));
         List<Roles> roles = rolesRervice.getAllRoles();
+        usersService.saveUsers(users);
 
-        usersService.saveUsers(editUser);
         return "redirect:/users";
     }
 
@@ -103,17 +113,25 @@ public class UsersController {
         return "redirect:/users/edit/" + userId;
     }
 
-    @PostMapping(value = "/account-detals/{id}")
+    @PostMapping(value = "/edit-user-detail/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String editUser(@RequestParam(name = "address") String address,
-                           @RequestParam(name = "phone") String phone,
-                           @RequestParam("id") Long id,
-                           @RequestParam(name = "cityId") Long cityId) {
+    public String editUserDetail(@RequestParam(name = "firstName") String firstName,
+                                 @RequestParam(name = "lastName") String lastName,
+                                 @RequestParam(name = "email") String email,
+                                 @RequestParam(name = "phone") String phone,
+                                 @RequestParam(name = "address") String address,
+                                 @RequestParam(name = "cityId") Long cityId,
+                                 @PathVariable("id") Long id) {
 
         Users users = usersService.getUsersById(id);
-        users.setAddress(address);
+        users.setFirstName(firstName);
+        users.setLastName(lastName);
+        users.setEmail(email);
         users.setPhone(phone);
+        users.setAddress(address);
         users.setCity(cityService.getCityById(cityId));
+        usersService.saveUsers(users);
+
         return "redirect:/account";
     }
 }
