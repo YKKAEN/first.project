@@ -49,7 +49,7 @@
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.phone}"></td>
                         <td th:text="${user.address}"></td>
-                        <td th:text="${user.city}"></td>
+                        <td th:text="${user.city.cityName}"></td>
                         <td>
                             <div th:each="role: ${user.roles}" th:text="${role.role}"></div>
                         </td>
