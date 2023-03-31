@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main">
+<div layout:fragment="content">
+
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h3>Create Your Account</h3>
+                        <ul>
+                            <li><a th:href="@{'/index'}">home</a></li>
+                            <li>Sign Up</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 4px">
+                        <div class="card-body p-5">
+                            <h3 class="mb-3">Sign Up</h3>
+                            <div th:if="${param.emailError}" class="alert alert-danger" role="alert">
+                                Email address is already taken.
+                            </div>
+                            <form th:action="@{'/register'}" th:method="post">
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" name="fullName" required class="form-control form-control-lg"/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" required class="form-control form-control-lg"/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" name="password" required class="form-control form-control-lg"/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Phone</label>
+                                    <input type="number" name="phone" required class="form-control form-control-lg"/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Address</label>
+                                    <input type="text" name="address" required class="form-control form-control-lg"/>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">Country</label>
+                                    <select class="form-select" name="countryId">
+                                        <option th:each="country : ${countryList}"
+                                                th:text="${country.countryName}"
+                                                th:value="${country.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label">City</label>
+                                    <select class="form-select" name="cityId">
+                                        <option th:each="city : ${cityList}"
+                                                th:text="${city.cityName}"
+                                                th:value="${city.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top: 25px">Continue</button>
+                                <p style="margin-top: 15px">Already have an account?&nbsp<a th:href="@{'/login'}">Sing In</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>
